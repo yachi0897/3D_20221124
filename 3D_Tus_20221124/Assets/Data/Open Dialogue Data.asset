@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueName: TEST
   dialogueContents:
-  - "\u9019\u662F\u54EA\u88E1?"
-  - "\u809A\u5B50\u597D\u9913"
+  - Where am I?
+  - umm....

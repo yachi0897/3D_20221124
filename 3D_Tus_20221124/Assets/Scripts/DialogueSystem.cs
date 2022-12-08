@@ -52,14 +52,24 @@ namespace FOX
             }
         }
 
+
+        /// <summary>
+        /// 打字效果
+        /// </summary>
+        
         private IEnumerator TypeEffect()
         {
             textName.text = dialogueOpening.dialogueName;
             textContent.text = "";
 
-            string dialogue = dialogueOpening.dialogueContents[0];
-         yield return dialogueInterval;
+            string dialogue = dialogueOpening.dialogueContents[1];
 
+            for(int i = 0; i < dialogue.Length; i++)
+            {
+                textContent.text += dialogue[i];
+                yield return dialogueInterval;
+            }
+            goTriangle.SetActive(true);
         }
     }
 
