@@ -24,9 +24,10 @@ namespace FOX
 
         private void Awake()
         {
-            StartCoroutine(Test());
-            print("取得測試對話的第一個字:" + testDialogue[0]);
-            StartCoroutine(ShowDialogue());
+            //StartCoroutine(Test());
+            //print("取得測試對話的第一個字:" + testDialogue[0]);
+            // StartCoroutine(ShowDialogue());
+            StartCoroutine(ShowDialogueUseFor());
         }
 
 
@@ -51,7 +52,15 @@ namespace FOX
            
         }
 
+        private IEnumerator ShowDialogueUseFor()
+        {
+            for(int i =0; i< testDialogue.Length; i++)
+            {
+                print(testDialogue[i]);
+                yield return new WaitForSeconds(0.2f);
+            }
 
+        }
 
 
 

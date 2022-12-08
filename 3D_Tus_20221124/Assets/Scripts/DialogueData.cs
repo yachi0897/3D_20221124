@@ -14,7 +14,7 @@ namespace FOX
         [Header("對話者名稱")]
         public string dialogueName;
         [Header("對話者內容"), TextArea(2, 10)]
-        public string[] dialogue;
+        public string[] dialogueContents;
     }
 
     
