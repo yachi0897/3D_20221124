@@ -10,11 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9968e91fff273e4dbfceef534c9c73e, type: 3}
-  m_Name: Open Dialogue Data
+  m_Name: Box
   m_EditorClassIdentifier: 
   dialogueName: Chara
   dialogueContents:
-  - Where am I?
-  - umm....
-  - .............
-  - NO CHOCOLATE!!
+  - It Lock!!

@@ -53,6 +53,7 @@ namespace FOX
         }
 
         private IEnumerator ShowDialogueUseFor()
+
         {
             for(int i =0; i< testDialogue.Length; i++)
             {
