@@ -1189,6 +1189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueIntervalTime: 0.1
   dialogueOpening: {fileID: 11400000, guid: be6d4ce08b63b3f4697a118efcc3fe7e, type: 2}
+  dialogueKey: 32
 --- !u!1 &524906802
 GameObject:
   m_ObjectHideFlags: 0

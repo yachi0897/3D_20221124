@@ -15,6 +15,8 @@ namespace FOX
         private float dialogueIntervalTime = 0.1f;
         [SerializeField, Header("開頭對話")]
         private DialogueData dialogueOpening;
+        [SerializeField, Header("對話按鍵")]
+        private KeyCode dialogueKey = KeyCode.Space;
 
 
         private WaitForSeconds dialogueInterval => new WaitForSeconds(dialogueIntervalTime);
@@ -56,7 +58,7 @@ namespace FOX
         /// <summary>
         /// 打字效果
         /// </summary>
-        
+
         private IEnumerator TypeEffect()
         {
             textName.text = dialogueOpening.dialogueName;
@@ -64,12 +66,24 @@ namespace FOX
 
             string dialogue = dialogueOpening.dialogueContents[1];
 
-            for(int i = 0; i < dialogue.Length; i++)
+            for (int i = 0; i < dialogue.Length; i++)
             {
                 textContent.text += dialogue[i];
                 yield return dialogueInterval;
             }
             goTriangle.SetActive(true);
+
+            //如果 玩家 還沒按下 指定按鍵 就等待
+            while (!Input.GetKeyDown(dialogueKey))
+            {
+                yield return null;
+            }
+            print("<color=#993300>玩家按下按鍵!</color>");
+
+
+
+
+
         }
     }
 
