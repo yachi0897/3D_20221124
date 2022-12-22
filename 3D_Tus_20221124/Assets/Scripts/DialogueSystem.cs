@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 
 namespace FOX
@@ -11,6 +12,7 @@ namespace FOX
     /// </summary>
     public class DialogueSystem : MonoBehaviour
     {
+        #region 資料區域 
         [SerializeField, Header("對話間隔"), Range(0, 0.5f)]
         private float dialogueIntervalTime = 0.1f;
         [SerializeField, Header("開頭對話")]
@@ -25,7 +27,14 @@ namespace FOX
         private TextMeshProUGUI textName;
         private TextMeshProUGUI textContent;
         private GameObject goTriangle;
-        #region
+        private PlayerInput playerInput;
+        #endregion
+
+
+
+
+        #region 事件
+
         private void Awake()
         {
             groupDialogue = GameObject.Find("畫布對話系統").GetComponent<CanvasGroup>();
@@ -34,11 +43,20 @@ namespace FOX
             goTriangle = GameObject.Find("對話完成圖示");
             goTriangle.SetActive(false);
 
-            StartCoroutine(FadeGroup());
-            StartCoroutine(TypeEffect());
+            playerInput = GameObject.Find("PlayerCapsule").GetComponent<PlayerInput>();
+
+
+
+            StartDialogue(dialogueOpening);
+
         }
         #endregion
-
+        public void StartDialogue(DialogueData data)
+        {
+            playerInput.enabled = false;
+            StartCoroutine(FadeGroup());
+            StartCoroutine(TypeEffect(data));
+        }
 
 
 
@@ -65,16 +83,16 @@ namespace FOX
         /// 打字效果
         /// </summary>
 
-        private IEnumerator TypeEffect()
+        private IEnumerator TypeEffect(DialogueData data)
         {
-            textName.text = dialogueOpening.dialogueName;
+            textName.text = data.dialogueName;
 
-            for (int j = 0; j < dialogueOpening.dialogueContents.Length; j++)
+            for (int j = 0; j < data.dialogueContents.Length; j++)
             {
 
                 textContent.text = "";
                 goTriangle.SetActive(false);
-                string dialogue = dialogueOpening.dialogueContents[j];
+                string dialogue = data.dialogueContents[j];
 
                 for (int i = 0; i < dialogue.Length; i++)
                 {
@@ -93,17 +111,19 @@ namespace FOX
             }
             StartCoroutine(FadeGroup(false));
 
+            playerInput.enabled = true;
+
 
 
 
         }
-        
-
-        
 
 
 
-}
+
+
+
+    }
 
 
 }
