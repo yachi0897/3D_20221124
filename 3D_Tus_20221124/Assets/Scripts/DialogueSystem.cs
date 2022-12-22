@@ -2,6 +2,7 @@
 using TMPro;
 using System.Collections;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 
 namespace FOX
@@ -30,7 +31,7 @@ namespace FOX
         private PlayerInput playerInput;
         #endregion
 
-
+        private UnityEvent onDialogueFinish;
 
 
         #region 事件
@@ -51,11 +52,12 @@ namespace FOX
 
         }
         #endregion
-        public void StartDialogue(DialogueData data)
+        public void StartDialogue(DialogueData data,UnityEvent _onDialogueFinish=null)
         {
             playerInput.enabled = false;
             StartCoroutine(FadeGroup());
             StartCoroutine(TypeEffect(data));
+            onDialogueFinish = _onDialogueFinish;
         }
 
 
@@ -111,8 +113,9 @@ namespace FOX
             }
             StartCoroutine(FadeGroup(false));
 
-            playerInput.enabled = true;
-
+            playerInput.enabled = true;        //開啟 玩家輸入元件
+            // 當onDialogueFinish?沒有值時不執行
+            onDialogueFinish?.Invoke();         //對話結束物件.呼叫();
 
 
 

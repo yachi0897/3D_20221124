@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace FOX
 {
@@ -9,6 +10,12 @@ namespace FOX
     {
         [SerializeField, Header("對話資料")]
         private DialogueData dataDialogue;
+        [SerializeField, Header("對話結束後的事件")]
+        private UnityEvent onDialogueFinish;
+        [SerializeField, Header("啟動道具")]
+        private GameObject propActive;
+        [SerializeField,Header("啟動後的對話資料")]
+        private DialogueData dataDialogueActive;
 
         private string nameTarget = "PlayerCapsule";
         private DialogueSystem dialogueSystem;
@@ -28,7 +35,15 @@ namespace FOX
             if (other.name.Contains(nameTarget))
             {
                 print(other.name);
-                dialogueSystem.StartDialogue(dataDialogue);
+                //如果不需要啟動道具 或者 啟動道具是顯示的 就執行 第一段對話
+                if (propActive == null || propActive.activeInHierarchy)
+                {
+                    dialogueSystem.StartDialogue(dataDialogue, onDialogueFinish);
+                }
+                else
+                {
+                    dialogueSystem.StartDialogue(dataDialogueActive);
+                }
             }
 
 
@@ -41,7 +56,26 @@ namespace FOX
         //碰撞持續
         private void OnTriggerStay(Collider other)
         {
-            
+
         }
+
+        ///<summary>
+        ///隱藏物件
+        ///</summary>
+        public void HiddenObject()
+        {
+            gameObject.SetActive(false);
+        }
+
+
+
+
+
+
+
+
+
     }
+
+
 }
