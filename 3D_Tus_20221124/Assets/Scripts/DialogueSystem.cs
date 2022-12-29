@@ -36,6 +36,7 @@ namespace FOX
 
         #region 事件
 
+
         private void Awake()
         {
             groupDialogue = GameObject.Find("畫布對話系統").GetComponent<CanvasGroup>();
@@ -52,6 +53,11 @@ namespace FOX
 
         }
         #endregion
+
+        public void StartDialogue(DialogueData data)
+        {
+            StartDialogue(data, null);
+        }
         public void StartDialogue(DialogueData data,UnityEvent _onDialogueFinish=null)
         {
             playerInput.enabled = false;
